@@ -1,5 +1,6 @@
-package com.example.pizzamaker
+package com.example.pizzamaker.ui
 
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -43,6 +44,7 @@ fun ToppingCell(
     modifier: Modifier = Modifier,
     onClickTopping: () -> Unit
 ) {
+    Log.d("ToppingCell", "Called ToppingCell for $topping")
     Row (
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
@@ -52,7 +54,7 @@ fun ToppingCell(
     {
         Checkbox(
             checked = (placement!=null),
-            onCheckedChange = { /* TODO */ }
+            onCheckedChange = { onClickTopping() }
         )
         Column(
             modifier = Modifier.weight(1f, fill = true)

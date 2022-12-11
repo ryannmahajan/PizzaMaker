@@ -10,5 +10,5 @@
     <string name="topping_peppers">Peppers</string>
     <string name="topping_pepperoni">Pepperoni</string>
     <string name="topping_pineapple">Pineapple</string>
-    <string name="place_order_button">Place Order</string>
+    <string name="place_order_button">Place Order (%1$s)</string>
 </resources>
