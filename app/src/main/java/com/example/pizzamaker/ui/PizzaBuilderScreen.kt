@@ -54,16 +54,27 @@ private fun ToppingsList(
     onEditPizza: (Pizza) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    var toppingBeingAdded:Topping? by rememberSaveable { mutableStateOf(null) }
+
+    toppingBeingAdded?.let { topping ->
+        ToppingPlacementDialog (
+            topping,
+            onSetToppingPlacement = { placement ->
+                onEditPizza(pizza.withTopping(topping, placement))
+            },
+            onDismissRequest = {
+                toppingBeingAdded = null
+            }
+        )
+    }
+
     LazyColumn(modifier = modifier) {
         items(Topping.values()) { topping ->
             ToppingCell(
                 topping = topping,
                 placement = pizza.toppings[topping],
                 onClickTopping = {
-                    onEditPizza( when (pizza.toppings[topping]) {
-                        ToppingPlacement.All -> pizza.withTopping(topping, null)
-                        else -> pizza.withTopping(topping, ToppingPlacement.All)
-                    })
+                    toppingBeingAdded = topping
                 }
             )
         }
@@ -77,7 +88,7 @@ private fun OrderButton(
     Button(
         modifier = modifier,
         onClick = {
-// TODO
+
         }
     ) {
         val currencyFormatter = remember { NumberFormat.getCurrencyInstance() }
